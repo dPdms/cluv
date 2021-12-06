@@ -205,36 +205,7 @@
                         target.prop("checked", false);
                     }
                 });
-
-
-            //환불 총 금액
-            let table = $("#returnTable");
-            let totalPriceList = table.find("tr").find("td:eq(4)");
-            let totalPrice = 0;
-            $.each(totalPriceList, function () {
-                totalPrice += Number($(this).text());
-                $(this).text(Number($(this).text()).toLocaleString("ko-KR"));
-            });
-            $("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
-
-            //환불 총 배송비
-            let totalRefundShipPriceList = table.find("tr").find("td:eq(5)");
-            let totalRefundShipPrice = 0;
-            $.each(totalRefundShipPriceList, function () {
-                totalRefundShipPrice += Number($(this).text());
-                $(this).text(Number($(this).text()).toLocaleString("ko-KR"));
-            });
-            $("#totalRefundShipPrice").text(totalRefundShipPrice.toLocaleString("ko-KR"));
-
-            //예상 총 환불 예정 금액
-            let totalRefundExpectPriceList = table.find("tr").find("td:eq(6)");
-            let totalRefundExpectPrice = 0;
-            $.each(totalRefundExpectPriceList, function () {
-                totalRefundExpectPrice += Number($(this).text());
-                $(this).text(Number($(this).text()).toLocaleString("ko-KR"));
-            });
-            $("#totalRefundExpectPrice").text(totalRefundExpectPrice.toLocaleString("ko-KR"));
-        });
+         });
     </script>
 </th:block>
 
@@ -260,7 +231,7 @@
                 <thread>
                     <!--					<th>그룹</th>-->
                     <th><input type="checkbox" id="selAll" name="selAll"/></th>
-                    <th>주문자</th>
+                    <th>주문번호</th>
                     <th>상품명/요청일</th>
                     <th>사유</th>
                     <th>상품금액</th>
@@ -288,17 +259,6 @@
                     </th:block>
                 </th:block>
                 </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="4"><span style="font-weight: 600;">합계</span></td>
-                    <!--환불 총 금액-->
-                    <td id="totalPrice"></td>
-                    <!--환불 총 배송비-->
-                    <td id="totalRefundShipPrice"></td>
-                    <!--예상 총 환불 예정 금액-->
-                    <td id="totalRefundExpectPrice"></td>
-                </tr>
-                </tfoot>
             </table>
         </div>
     </div>
@@ -308,7 +268,7 @@
 
             <li class="page-item" th:classappend="${returns.number eq 0}?'disabled':''">
                 <a th:href="@{'/returns/' + ${returns.number-1}}" aria-label='Previous' class="page-link">
-                    <span aria-hidden='true'>Previous</span>
+                    <span aria-hidden='true'>이전</span>
                 </a>
             </li>
 
@@ -318,7 +278,7 @@
 
             <li class="page-item" th:classappend="${returns.number+1 ge returns.totalPages}?'disabled':''">
                 <a th:href="@{'/returns/' + ${returns.number+1}}" aria-label='Next' class="page-link">
-                    <span aria-hidden='true'>Next</span>
+                    <span aria-hidden='true'>다음</span>
                 </a>
             </li>
 

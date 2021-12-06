@@ -64,7 +64,7 @@
 
             var url = "/order/return/confirm";
 
-            if( !orderReqReturnConfirm ||  orderReqReturnConfirm.length < 1 ) {
+            if (!orderReqReturnConfirm || orderReqReturnConfirm.length < 1) {
                 alert("항목을 선택 하신 후 확인 처리 하시기 바랍니다.");
                 return;
             }
@@ -175,7 +175,7 @@
                 <thread>
                     <!--					<th>그룹</th>-->
                     <th><input type="checkbox" id="selAll" name="selAll"/></th>
-                    <th>주문자</th>
+                    <th>주문번호</th>
                     <th>상품명/요청일</th>
                     <th>사유</th>
                     <th>상품금액</th>
@@ -191,11 +191,14 @@
                         <tr>
                             <!--2개이상 장바구니 구매 대응-->
                             <th:block th:if="${(item.returnStatus == T(com.gsitm.intern.constant.ReturnStatus).N )}">
-                                <td th:if="${itemStat.index == 0 and orderItem.getOrderItemDtoList().size() > 1}" th:rowspan="${orderItem.getOrderItemDtoList().size()}">
-                                    <input type="checkbox" th:name="${'groupChk-' + orderItem.orderId}" th:value="${orderItem.orderId}"/>
+                                <td th:if="${itemStat.index == 0 and orderItem.getOrderItemDtoList().size() > 1}"
+                                    th:rowspan="${orderItem.getOrderItemDtoList().size()}">
+                                    <input type="checkbox" th:name="${'groupChk-' + orderItem.orderId}"
+                                           th:value="${orderItem.orderId}"/>
                                 </td>
                                 <td th:if="${itemStat.index == 0 and orderItem.getOrderItemDtoList().size() == 1}">
-                                    <input type="checkbox" th:name="${'groupChk-' + orderItem.orderId}" th:value="${orderItem.orderId}"/>
+                                    <input type="checkbox" th:name="${'groupChk-' + orderItem.orderId}"
+                                           th:value="${orderItem.orderId}"/>
                                 </td>
                             </th:block>
                             <th:block th:if="${(item.returnStatus == T(com.gsitm.intern.constant.ReturnStatus).Y )}">
@@ -204,51 +207,42 @@
 
                             <td th:text="${orderItem.orderId}"></td>
                             <td th:text="${item.itemNm }"></td>
-                            <td>문제가 많아요.</td>
+                            <td>상품 잘못주문</td>
                             <td th:text="${item.returnPrice }"></td>
                             <td th:text="${item.returnCount }"></td>
                             <td th:text="5000"></td>
                             <td th:text="${(item.returnPrice * item.returnCount) - 5000}"></td>
 
-                            <td th:if="${(item.returnStatus == T(com.gsitm.intern.constant.ReturnStatus).Y )}">반품 처리완료</td>
-                            <td th:if="${(item.returnStatus == T(com.gsitm.intern.constant.ReturnStatus).N )}">반품 처리대기</td>
+                            <td th:if="${(item.returnStatus == T(com.gsitm.intern.constant.ReturnStatus).Y )}">반품 처리완료
+                            </td>
+                            <td th:if="${(item.returnStatus == T(com.gsitm.intern.constant.ReturnStatus).N )}">반품 처리대기
+                            </td>
                         </tr>
                     </th:block>
                 </th:block>
                 </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="4"><span style="font-weight: 600;">합계</span></td>
-                    <!--환불 총 금액-->
-                    <td id="totalPrice"></td>
-                    <!--환불 총 수량-->
-                    <td id="totalCount"></td>
-                    <!--환불 총 배송비-->
-                    <td id="totalRefundShipPrice"></td>
-                    <!--예상 총 환불 예정 금액-->
-                    <td id="totalRefundExpectPrice"></td>
-                </tr>
-                </tfoot>
-            </table>
+              </table>
         </div>
     </div>
 
-    <div class="pageBox" th:with="start=${(returns.number/maxPage)*maxPage + 1}, end=(${(returns.totalPages == 0) ? 1 : (start + (maxPage - 1) < returns.totalPages ? start + (maxPage - 1) : returns.totalPages)})">
+    <div class="pageBox"
+         th:with="start=${(returns.number/maxPage)*maxPage + 1}, end=(${(returns.totalPages == 0) ? 1 : (start + (maxPage - 1) < returns.totalPages ? start + (maxPage - 1) : returns.totalPages)})">
         <ul class="pagination justify-content-center">
 
             <li class="page-item" th:classappend="${returns.number eq 0}?'disabled':''">
                 <a th:href="@{'/returns/' + ${returns.number-1}}" aria-label='Previous' class="page-link">
-                    <span aria-hidden='true'>Previous</span>
+                    <span aria-hidden='true'>이전</span>
                 </a>
             </li>
 
-            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${returns.number eq page-1}?'active':''">
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
+                th:classappend="${returns.number eq page-1}?'active':''">
                 <a th:href="@{'/returns/' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
             </li>
 
             <li class="page-item" th:classappend="${returns.number+1 ge returns.totalPages}?'disabled':''">
                 <a th:href="@{'/returns/' + ${returns.number+1}}" aria-label='Next' class="page-link">
-                    <span aria-hidden='true'>Next</span>
+                    <span aria-hidden='true'>다음</span>
                 </a>
             </li>
 

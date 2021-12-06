@@ -107,7 +107,7 @@
 
             //환불 총 금액
             let table = $("#returnTable");
-            let totalPriceList = table.find("td:eq(2)");
+            let totalPriceList = table.find("tbody td:nth-child(3)");
             let totalPrice = 0;
             $.each(totalPriceList, function () {
                 totalPrice += Number($(this).text());
@@ -116,7 +116,7 @@
             $("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
 
             //환불 총 배송비
-            let totalRefundShipPriceList = table.find("td:eq(3)");
+            let totalRefundShipPriceList = table.find("tbody td:nth-child(4)");
             let totalRefundShipPrice = 0;
             $.each(totalRefundShipPriceList, function () {
                 totalRefundShipPrice += Number($(this).text());
@@ -125,7 +125,7 @@
             $("#totalRefundShipPrice").text(totalRefundShipPrice.toLocaleString("ko-KR"));
 
             //예상 총 환불 예정 금액
-            let totalRefundExpectPriceList = table.find("td:eq(4)");
+            let totalRefundExpectPriceList = table.find("tbody td:nth-child(5)");
             let totalRefundExpectPrice = 0;
             $.each(totalRefundExpectPriceList, function () {
                 totalRefundExpectPrice += Number($(this).text());

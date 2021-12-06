@@ -8,12 +8,6 @@ spring:
     url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1660
     username: it1660
     password: it1660
-  #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
-
-  # [ h2 설정 ]
-  #  h2:
-  #    console:
-  #      enabled: true
 
   devtools:
     livereload:
@@ -22,15 +16,11 @@ spring:
   sql:
     init:
       mode: always
-    #      schema-locations: schema.sql
-    #      data-locations: data.sql
 
-    # Thymeleaf cache 사용 중지
+
   thymeleaf:
     cache: false
-  #    check-template-location: true
-  #    prefix: classpath:/templates/thymeleafEx
-  #    suffix: .html
+
 
   servlet:
     multipart:
@@ -40,7 +30,7 @@ spring:
   jpa:
     hibernate:
       default_batch_fetch_size: '1000'
-      ddl-auto: update
+      ddl-auto: create
       database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
@@ -57,19 +47,6 @@ mybatis:
     jdbc-type-for-null: varchar
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
-
-#logging.level:
-#  jdbc:
-#    sqlonly: debug
-#    sqltiming: info
-#    resultsettable: info
-#    audit: off
-#    resultset: off
-#    connection: off
-#  org.hibernate.SQL: trace
-
-
-
 
 
 

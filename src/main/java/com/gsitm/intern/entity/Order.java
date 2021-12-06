@@ -5,7 +5,6 @@ import com.gsitm.intern.constant.OrderStatus;
 import com.gsitm.intern.constant.ReturnStatus;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,7 +30,6 @@ public class Order extends BaseEntity{
     private LocalDateTime orderDate; //주문일
 
     @Enumerated(EnumType.STRING)
-//    @ColumnDefault("N")
     private OrderStatus orderStatus; // 주문상태
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL,
